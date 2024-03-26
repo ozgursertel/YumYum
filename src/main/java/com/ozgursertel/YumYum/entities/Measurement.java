@@ -2,7 +2,9 @@ package com.ozgursertel.YumYum.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Table(name = "measurement")
 @Entity
@@ -18,5 +20,8 @@ public class Measurement {
     private String name;
     @Column(name = "abbreviation")
     private String abbreviation;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "measurement", cascade = CascadeType.ALL)
+    private List<FoodIngredient> foodIngredients;
+
 
 }

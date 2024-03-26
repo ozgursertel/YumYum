@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Table(name = "food-ingredient")
 @Entity
@@ -18,15 +18,10 @@ public class FoodIngredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "dish_id", nullable = false)
-    private Dish dish;
-    @ManyToOne
-    @JoinColumn(name = "ingredient_id", nullable = false)
-    private Ingredient ingredient;
-    @ManyToOne
-    @JoinColumn(name = "measurement_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "measurement_id" )
     private Measurement measurement;
+
     @Column(name = "quantity")
     private Double quantity;
 }
