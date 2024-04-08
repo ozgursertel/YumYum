@@ -1,4 +1,4 @@
-package com.ozgursertel.YumYum.entities;
+package com.ozgursertel.YumYum.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "dish")
@@ -31,9 +32,15 @@ public class Dish {
     private String videoUrl;
     @Column(name = "image_url")
     private String imageUrl;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH
+    })
     @JoinTable(name = "food-ingredient", joinColumns = @JoinColumn(name = "dish_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredients;
+    private Set<Ingredient> ingredients;
 
 }

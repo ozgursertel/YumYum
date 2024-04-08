@@ -1,4 +1,5 @@
-package com.ozgursertel.YumYum.entities;
+package com.ozgursertel.YumYum.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingredient")
@@ -21,9 +23,8 @@ public class Ingredient {
     @Column(name = "name",nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(name = "food-ingredient", joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "dish_id"))
-    private List<Dish> dishes;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Dish> dishes;
 
 }

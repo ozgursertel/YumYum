@@ -1,4 +1,4 @@
-package com.ozgursertel.YumYum.entities;
+package com.ozgursertel.YumYum.entity;
 
 import lombok.*;
 
